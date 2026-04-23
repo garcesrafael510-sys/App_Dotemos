@@ -1,0 +1,52 @@
+<mxfile host="65bd71144e">
+    <diagram id="sipoc_diagram" name="SIPOC TEXTIL">
+        <mxGraphModel dx="238" dy="472" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="header_s" value="&lt;b&gt;S - Suppliers (Proveedores)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#0050ef;strokeColor=#001DBC;fontColor=#ffffff;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="40" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="header_i" value="&lt;b&gt;I - Inputs (Entradas)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="40" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="header_p" value="&lt;b&gt;P - Process (Proceso)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="40" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="header_o" value="&lt;b&gt;O - Outputs (Salidas)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="40" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="header_c" value="&lt;b&gt;C - Customers (Clientes)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="40" width="200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="content_s" value="&lt;ul style=&quot;text-align: left;&quot;&gt;&lt;li&gt;Gerente Ronald (DOTEMOS)&lt;/li&gt;&lt;li&gt;Área comercial (pronósticos de ventas)&lt;/li&gt;&lt;li&gt;Área de pedidos / clientes&lt;/li&gt;&lt;li&gt;Área de inventarios&lt;/li&gt;&lt;li&gt;Área de producción&lt;/li&gt;&lt;li&gt;Sistema o software interno&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=10;spacingLeft=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="80" width="200" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="content_i" value="&lt;ul style=&quot;text-align: left;&quot;&gt;&lt;li&gt;Pedidos confirmados&lt;/li&gt;&lt;li&gt;Pronóstico de demanda&lt;/li&gt;&lt;li&gt;Capacidad instalada&lt;/li&gt;&lt;li&gt;Disponibilidad de operarios&lt;/li&gt;&lt;li&gt;Inventario de materia prima&lt;/li&gt;&lt;li&gt;Tiempos estándar de producción&lt;/li&gt;&lt;li&gt;Secuencia de órdenes&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=10;spacingLeft=10;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="80" width="200" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="content_p" value="&lt;ol style=&quot;text-align: left;&quot;&gt;&lt;li&gt;Recolección de información productiva&lt;/li&gt;&lt;li&gt;Análisis de capacidad y carga de trabajo&lt;/li&gt;&lt;li&gt;Programación de órdenes de producción&lt;/li&gt;&lt;li&gt;Nivelación de la producción (balanceo)&lt;/li&gt;&lt;li&gt;Seguimiento y medición del cumplimiento&lt;/li&gt;&lt;li&gt;Ajustes y reprogramación&lt;/li&gt;&lt;/ol&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=10;spacingLeft=10;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="80" width="200" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="content_o" value="&lt;ul style=&quot;text-align: left;&quot;&gt;&lt;li&gt;Plan maestro de producción (PMP)&lt;/li&gt;&lt;li&gt;Cronograma de producción&lt;/li&gt;&lt;li&gt;Órdenes programadas&lt;/li&gt;&lt;li&gt;Producción nivelada&lt;/li&gt;&lt;li&gt;Indicadores de desempeño (cumplimiento, eficiencia)&lt;/li&gt;&lt;li&gt;Reducción de tiempos muertos&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=10;spacingLeft=10;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="80" width="200" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="content_c" value="&lt;ul style=&quot;text-align: left;&quot;&gt;&lt;li&gt;Gerencia de producción&lt;/li&gt;&lt;li&gt;Área operativa de la planta&lt;/li&gt;&lt;li&gt;Área comercial&lt;/li&gt;&lt;li&gt;Clientes finales (indirectamente)&lt;/li&gt;&lt;/ul&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=10;spacingLeft=10;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="80" width="200" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_s_i" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="content_s" target="content_i" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_i_p" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="content_i" target="content_p" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_p_o" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="content_p" target="content_o" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow_o_c" value="" style="endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="content_o" target="content_c" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

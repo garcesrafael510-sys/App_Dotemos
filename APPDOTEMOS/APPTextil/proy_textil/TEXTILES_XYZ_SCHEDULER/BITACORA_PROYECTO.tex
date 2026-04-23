@@ -1,0 +1,117 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+
+\title{\textbf{BITÁCORA DE PROYECTO: APP TEXTIL SCHEDULER}\\ Sistema de Programación Desagregada para Producción Textil}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introducción y Justificación del Proyecto}
+
+\subsection{El Contexto del Mercado Textil}
+La industria textil y de confección moderna opera bajo un modelo de \textbf{Alta Mezcla y Bajo Volumen (High Mix / Low Volume)} dictado por tendencias de moda rápidas o \textit{Fast Fashion}. El mercado exige tiempos de respuesta (\textit{Lead Times}) cada vez más cortos, lotes más pequeños y alta personalización. Dado que los márgenes de ganancia en confección suelen ser estrechos, la eficiencia operativa en el piso de planta no es un lujo, sino el factor determinante para la supervivencia y rentabilidad de la empresa.
+
+\subsection{El Problema Operativo (El "Por Qué")}
+Tradicionalmente, las empresas textiles planifican su piso de planta (\textit{Shop Floor}) apoyándose en el conocimiento empírico del supervisor, en hojas de cálculo estáticas, o mediante intuición. Este enfoque manual es incapaz de procesar las múltiples variables dinámicas del entorno de producción de manera simultánea, tales como:
+\begin{itemize}
+    \item La variabilidad de los tiempos estándar (SAM) por cada tipo de producto y operación.
+    \item La restricción de la capacidad finita de la mano de obra disponible.
+    \item Las diferentes rutas de proceso de ensamblaje (Ensamble, Terminación, General).
+\end{itemize}
+
+\textbf{Consecuencias de la falta de un sistema informático:}
+\begin{enumerate}
+    \item \textbf{Altos tiempos de ocio (Muda de Espera):} Desbalanceo en la línea donde operarios quedan sin carga mientras otros están saturados.
+    \item \textbf{Incumplimiento de fechas de entrega:} Imposibilidad de proyectar con matemáticas exactas si la capacidad instalada puede absorber la carga de trabajo en el tiempo requerido.
+    \item \textbf{Cuellos de botella impredecibles:} Al cambiar la producción de una referencia a otra, la carga de trabajo fluctúa, generando acumulaciones de inventario en proceso (WIP) descontroladas.
+\end{enumerate}
+
+\subsection{La Solución Propuesta}
+Nuestra aplicación digitaliza y automatiza este proceso matemático. En lugar de un balanceo a prueba y error, el sistema provee una nivelación rápida, estandarizada y repetible mediante un \textbf{algoritmo de Balanceo Heurístico Secuencial}. La herramienta permite responder con exactitud: \textbf{¿Qué producir?, ¿Cuánto producir? y ¿Cuándo y con Quién producir?}.
+
+\section{Marco Teórico y Conceptos Clave}
+
+Para comprender el motor de la herramienta, definimos los siguientes principios de Ingeniería de Métodos y Programación de la Producción:
+
+\begin{itemize}
+    \item \textbf{Plan Maestro de Producción (MPS):} Herramienta macro que define las cantidades agregadas a fabricar (ej. semanas o meses). Nuestra app es el paso siguiente al MPS.
+    \item \textbf{Programación Desagregada:} El enfoque central de la APP. Toma una orden específica (cantidades exactas de una Referencia X) y la desglosa al nivel más detallado: tiempo por operación (minutos) asignada a un operario específico.
+    \item \textbf{SAM (Standard Allowed Minute / Minuto Estándar Asignado):} El tiempo que un trabajador calificado necesita para realizar una operación específica a un ritmo normal. En la APP, el SAM es la "moneda" que se divide y reparte de forma equitativa entre la fuerza laboral.
+    \item \textbf{BOM (Bill of Materials / Hoja de Ruta):} A diferencia de la industria metalmecánica (lista de piezas), en confección, el BOM actúa como el 'Routing' o "Secuencia de Operaciones". Define el orden (Unir hombros, Pegar cuello), la máquina requerida y el SAM. Sin el BOM, el algoritmo carece de input para calcular cargas.
+\end{itemize}
+
+\subsection{Celdas de Manufactura vs. Modelos Tradicionales}
+\begin{itemize}
+    \item \textbf{Flow Shop (Ej. Ensamblaje Automotriz):} Línea continua, rígida, ideal para volúmenes masivos.
+    \item \textbf{Job Shop (Talleres agrupados por función):} Diferentes departamentos (Solo corte, solo costura plana). Genera mucho traslado y cuellos de botella impredecibles.
+    \item \textbf{Celdas de Manufactura (Modelo de la APP):} Agrupa operarios polivalentes y diversas máquinas en "mini-fábricas" dedicadas a toda la ruta de un lote. La APP asume el modelo de celda, distribuyendo la carga total entre N operarios para que trabajen como un sistema unificado.
+\end{itemize}
+
+\subsection{Programación por Lotes y Tiempos de Preparación (Setup)}
+El modelo opera de manera orientada por lotes (Batch). Cambiar hilos, ajustes y adaptar la maquinaria toma tiempo (Setup Time). La programación por lotes en la APP permite agrupar todas las unidades de una misma referencia para procesarlas de corrido en la célula, diluyendo este tiempo improductivo, para luego saltar a la siguiente referencia.
+
+\section{Análisis de Cuellos de Botella y Factores Críticos}
+
+En ambientes Job Shop o Flow Shop, el cuello de botella es fácilmente visible: es la máquina física más lenta o la estación con una montaña de material esperando.
+
+\textbf{¿Cómo maneja y mitiga la APP los Cuellos de Botella?}\\
+La APP emplea el principio de "polivalencia" y "división de tareas líquidas". Si una operación requiere 90 minutos de esfuerzo y el ciclo de un operario es de 60 minutos, la operación en un modelo rígido sería un cuello de botella infranqueable. Sin embargo, nuestro algoritmo heurístico "llena" los 60 minutos del Operario 1, y asigna los 30 minutos restantes al Operario 2.
+
+\textbf{Identificación del Factor Crítico en este software:}\\
+En nuestro modelo, el cuello de botella físico individual se diluye al ser absorbido por la célula de trabajo en conjunto. El factor crítico real y que el software alerta ocurre cuando \textbf{el Tiempo Total Necesario (SAM acumulado de la demanda) supera el Tiempo Total Disponible (Capacidad Finita de Operarios $\times$ Ciclo)}. En ese punto, el sistema entra en un déficit de "Operarios Insuficientes", señalando que la capacidad global de la planta es el límite (Restricción de Sistema).
+
+\section{SIPOC: Sistema de Programación de Producción}
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|l|X|}
+\hline
+\textbf{Elemento} & \textbf{Descripción para la APP} \\ \hline
+\textbf{S (Supplier / Proveedor)} & - Departamento Comercial (Ventas / Demanda) \newline - Ingeniería de Producción (Métodos y Tiempos / Estudios MTM) \\ \hline
+\textbf{I (Input / Entrada)} & - Órdenes de Producción: (Referencia, Cantidad esperada). \newline - Base de datos BOM / Hojas de Ruta: (Operaciones, Secuencia, SAM). \newline - Restricciones de Planta: (\# Operarios, Tiempo dispuesto). \\ \hline
+\textbf{P (Process / Procesos)} & 
+1. Cálculo de Meta Takt Time (Unidades a fabricar por hora). \newline
+2. Traducción de demanda a carga en minutos (U/H $\times$ SAM). \newline
+3. Ejecución del Algoritmo de Balanceo Heurístico Secuencial. \newline
+4. Diagramación de Gantt In-Memory. \newline
+5. Consolidación de Indicadores KPIs. \\ \hline
+\textbf{O (Output / Salida)} & - Plan de Producción Desagregado y balanceado de la orden. \newline - Carga laboral medida en minutos exactos por Operario. \newline - Determinación de la saturación del sistema. \\ \hline
+\textbf{C (Customer / Cliente)} & - Supervisores de Planta. \newline - Lideres de Célula de Manufactura. \newline - Dirección y Gerencia de Producción. \\ \hline
+\end{tabularx}
+\end{table}
+
+\section{Arquitectura Técnica y Lógica del Motor (Diagrama de Flujo)}
+
+El "cerebro" de la aplicación (Motor Heurístico - \texttt{scheduling\_engine.py}) funciona bajo los siguientes pasos metodológicos abstractos:
+
+\begin{enumerate}
+    \item \textbf{Lectura de Demanda:} Recepción de los datos de la Orden seleccionada (Referencias y Cantidades).
+    \item \textbf{Cruce Referencial:} Validación estricta; el sistema ubica el BOM (SAMs) de la referencia. Si no existe, lanza una "Alerta de Falla de Ingeniería".
+    \item \textbf{Cálculo de Eficacia (Meta Teórica):} \newline \texttt{Unidades por Hora a Fabricar = (Cantidad Operarios * Tiempo de Ciclo) / Total SAM de Prenda}
+    \item \textbf{Desagregación Dinámica:} Por cada operación en secuencia: \newline \texttt{Tiempo Requerido por Operación = SAM de la operación * Unidades por Hora Calculadas}
+    \item \textbf{Bucle de Balanceo Heurístico (Asignación Tipo "Llenado de Contenedores"):}
+    \begin{itemize}
+        \item El algoritmo evalúa el \textit{Operario 1} (Contenedor).
+        \item Ingresa el tiempo de la primera operación disponible al contenedor.
+        \item Si la operación excede el tiempo libre del operario, la capacidad libre se llena al 100\% y el "excedente" de tiempo de la operación rebasa, trasladándose automáticamente a ser asignado al siguiente \textit{Operario (Contenedor 2)}.
+        \item Si un operario llega a 0 minutos disponibles, el índice avanza estructuralmente al operario consecutivo.
+    \end{itemize}
+    \item \textbf{Validación de Factibilidad Constante:} Si la matriz de operaciones tiene remanentes (tiempos sobrantes) y el índice de operarios llega a su límite, se emite una interrupción lógica por "Capacidad Instalada Deficiente".
+    \item \textbf{Motor Visual y Analítico:} Representación visual gráfica tipo Gantt de asignación de minutos y despliegue del Dashboard estadístico global de balanceo.
+\end{enumerate}
+
+\section{Conclusión}
+
+Esta aplicación no es únicamente un modelo de datos estructurado o CRUD, sino una herramienta computacional de \textbf{Investigación de Operaciones} aplicada a la industria. Conforma un ecosistema completo para tomar decisiones gerenciales informadas en un modelo desagregado, reemplazando la intuición con un algorítmico matemático puro para balanceo de capacidades en entornos celulares de alta complejidad.
+
+\end{document}

@@ -1,0 +1,61 @@
+graph TD
+    %% Estilos de los contenedores
+    classDef sup fill:#dae8fc,stroke:#6c8ebf,stroke-width:2px;
+    classDef inp fill:#d5e8d4,stroke:#82b366,stroke-width:2px;
+    classDef pro fill:#fff2cc,stroke:#d6b656,stroke-width:2px;
+    classDef out fill:#ffe6cc,stroke:#d79b00,stroke-width:2px;
+    classDef cus fill:#e1d5e7,stroke:#9673a6,stroke-width:2px;
+
+    subgraph S ["SUPPLIERS (Proveedores)"]
+        S1(Gerente Ronald - DOTEMOS)
+        S2(Área comercial - Pronósticos)
+        S3(Área de pedidos / Clientes)
+        S4(Área de inventarios)
+        S5(Área de producción)
+        S6(Software interno / Scheduler)
+    end
+    class S sup;
+
+    subgraph I ["INPUTS (Entradas)"]
+        I1(Pedidos confirmados)
+        I2(Pronóstico de demanda)
+        I3(Capacidad instalada)
+        I4(Disponibilidad de operarios)
+        I5(Inventario de materia prima)
+        I6(Tiempos estándar - SAM)
+        I7(Secuencia de órdenes)
+    end
+    class I inp;
+
+    subgraph P ["PROCESS (Proceso)"]
+        P1(1. Recolección de información) --> P2(2. Análisis de capacidad)
+        P2 --> P3(3. Programación de órdenes)
+        P3 --> P4(4. Nivelación y Balanceo)
+        P4 --> P5(5. Seguimiento productivo)
+        P5 --> P6(6. Ajustes y reprogramación)
+    end
+    class P pro;
+
+    subgraph O ["OUTPUTS (Salidas)"]
+        O1(Plan maestro de producción - PMP)
+        O2(Cronograma y Carta Gantt)
+        O3(Órdenes asignadas)
+        O4(Producción y Cargas Niveladas)
+        O5(KPIs - Eficiencia y Cumplimiento)
+        O6(Tiempos muertos reducidos)
+    end
+    class O out;
+
+    subgraph C ["CUSTOMERS (Clientes)"]
+        C1(Gerencia de producción)
+        C2(Área operativa en planta)
+        C3(Área comercial)
+        C4(Clientes finales - Indirectos)
+    end
+    class C cus;
+
+    %% Conexiones principales del SIPOC
+    S == Provee a ==> I
+    I == Alimenta el ==> P
+    P == Genera ==> O
+    O == Satisface a ==> C
